@@ -1,0 +1,11 @@
+﻿接口,方法,用途,请求参数/Body,响应重点,是否会改数据
+/device/info,GET,获取服务器、设备列表和协议清单,无,server、devices、protocol,否
+/device/register,POST,设备开机注册,id、name、type、capabilities,device、server,是，登记/更新设备
+/device/heartbeat,POST,设备心跳保活,deviceId,device、serverTime,是，更新 lastSeenAt
+/device/config,GET,读取设备配置,deviceId 查询参数,pollIntervalSeconds、heartbeatSeconds、actions、snoozeMinutes,轻微，touch 设备
+/device/status,GET,读取设备状态,deviceId 可选,server、devices,轻微，touch 设备
+/device/next-reminder,GET,拉取下一条 active 提醒,deviceId 查询参数,reminder 或 null,轻微，touch 设备
+/device/complete,POST,硬件完成提醒,deviceId、reminderId,changes、reminder,是，完成提醒
+/device/snooze,POST,硬件稍后提醒,deviceId、reminderId、minutes,dueAt、minutes、reminder,是，修改提醒时间
+/device/test-push,POST,测试推送事件,deviceId、title、task 可选,payload,否，不改真实提醒
+/device/stream,GET,设备 SSE 实时事件流,deviceId 查询参数,SSE 事件,否
